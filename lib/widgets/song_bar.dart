@@ -24,13 +24,13 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:musify/API/musify.dart';
-import 'package:musify/extensions/l10n.dart';
-import 'package:musify/main.dart';
-import 'package:musify/utilities/common_variables.dart';
-import 'package:musify/utilities/flutter_toast.dart';
-import 'package:musify/utilities/formatter.dart';
-import 'package:musify/widgets/no_artwork_cube.dart';
+import 'package:billie/API/musify.dart';
+import 'package:billie/extensions/l10n.dart';
+import 'package:billie/main.dart';
+import 'package:billie/utilities/common_variables.dart';
+import 'package:billie/utilities/flutter_toast.dart';
+import 'package:billie/utilities/formatter.dart';
+import 'package:billie/widgets/no_artwork_cube.dart';
 
 class SongBar extends StatefulWidget {
   const SongBar(
@@ -406,7 +406,7 @@ class _OfflineArtwork extends StatelessWidget {
       width: size,
       height: size,
       child: ClipRRect(
-        borderRadius: BorderRadiusGeometry.circular(commonMiniArtworkRadius),
+        borderRadius: BorderRadius.circular(commonMiniArtworkRadius),
         child: Stack(
           alignment: Alignment.center,
           children: [
@@ -475,7 +475,7 @@ class _OnlineArtwork extends StatelessWidget {
             memCacheWidth: 256,
             memCacheHeight: 256,
             imageBuilder: (context, imageProvider) => ClipRRect(
-              borderRadius: BorderRadiusGeometry.circular(
+              borderRadius: BorderRadius.circular(
                 commonMiniArtworkRadius,
               ),
               child: Stack(

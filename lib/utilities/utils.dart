@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:musify/main.dart';
-import 'package:musify/utilities/common_variables.dart';
+import 'package:billie/main.dart';
+import 'package:billie/utilities/common_variables.dart';
 
 BorderRadius getItemBorderRadius(int index, int totalLength) {
   const defaultRadius = BorderRadius.zero;

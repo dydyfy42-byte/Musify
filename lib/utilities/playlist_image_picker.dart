@@ -20,11 +20,14 @@
  */
 
 import 'dart:convert';
-import 'package:file_picker/file_picker.dart';
+// import 'package:file_picker/file_picker.dart'; // Temporarily removed for build
 import 'package:flutter/material.dart';
-import 'package:musify/extensions/l10n.dart';
+import 'package:billie/extensions/l10n.dart';
 
 Future<String?> pickImage() async {
+  // Temporarily disabled for build
+  return null;
+  /*
   final result = await FilePicker.platform.pickFiles(
     type: FileType.image,
     withData: true,
@@ -63,6 +66,7 @@ Future<String?> pickImage() async {
   }
 
   return null;
+  */
 }
 
 Widget buildImagePreview({

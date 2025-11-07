@@ -24,13 +24,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:musify/API/version.dart';
-import 'package:musify/extensions/l10n.dart';
-import 'package:musify/main.dart';
-import 'package:musify/services/router_service.dart';
-import 'package:musify/services/settings_manager.dart';
-import 'package:musify/utilities/url_launcher.dart';
-import 'package:musify/widgets/auto_format_text.dart';
+import 'package:billie/API/version.dart';
+import 'package:billie/extensions/l10n.dart';
+import 'package:billie/main.dart';
+import 'package:billie/services/router_service.dart';
+import 'package:billie/services/settings_manager.dart';
+import 'package:billie/utilities/url_launcher.dart';
+import 'package:billie/widgets/auto_format_text.dart';
 
 const String checkUrl =
     'https://raw.githubusercontent.com/gokadzev/Musify/update/check.json';
@@ -38,7 +38,7 @@ const String releasesUrl =
     'https://api.github.com/repos/gokadzev/Musify/releases/latest';
 const String downloadUrlKey = 'url';
 const String downloadUrlArm64Key = 'arm64url';
-const String downloadFilename = 'Musify.apk';
+const String downloadFilename = 'Billie.apk';
 
 Future<void> checkAppUpdates() async {
   try {

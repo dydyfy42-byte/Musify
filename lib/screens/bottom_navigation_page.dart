@@ -24,9 +24,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:musify/extensions/l10n.dart';
-import 'package:musify/services/settings_manager.dart';
-import 'package:musify/widgets/mini_player.dart';
+import 'package:billie/extensions/l10n.dart';
+import 'package:billie/services/settings_manager.dart';
+import 'package:billie/widgets/mini_player.dart';
 
 class BottomNavigationPage extends StatefulWidget {
   const BottomNavigationPage({required this.child, super.key});

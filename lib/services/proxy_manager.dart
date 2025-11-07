@@ -26,9 +26,9 @@ import 'dart:math';
 
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart';
-import 'package:musify/main.dart';
-import 'package:musify/models/proxy_model.dart';
-import 'package:musify/services/settings_manager.dart';
+import 'package:billie/main.dart';
+import 'package:billie/models/proxy_model.dart';
+import 'package:billie/services/settings_manager.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 class ProxyManager {

@@ -21,34 +21,37 @@
 
 import 'dart:async';
 
-import 'package:app_links/app_links.dart';
+// import 'package:app_links/app_links.dart'; // Temporarily removed for build
 import 'package:audio_service/audio_service.dart';
-import 'package:dynamic_color/dynamic_color.dart';
+// import 'package:dynamic_color/dynamic_color.dart'; // Temporarily removed for build
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:musify/API/musify.dart';
-import 'package:musify/extensions/l10n.dart';
-import 'package:musify/localization/app_localizations.dart';
-import 'package:musify/services/audio_service.dart';
-import 'package:musify/services/data_manager.dart';
-import 'package:musify/services/io_service.dart';
-import 'package:musify/services/logger_service.dart';
-import 'package:musify/services/playlist_sharing.dart';
-import 'package:musify/services/router_service.dart';
-import 'package:musify/services/settings_manager.dart';
-import 'package:musify/services/update_manager.dart';
-import 'package:musify/style/app_themes.dart';
-import 'package:musify/utilities/flutter_toast.dart';
+import 'package:billie/API/musify.dart';
+import 'package:billie/extensions/l10n.dart';
+import 'package:billie/firebase_options.dart';
+import 'package:billie/localization/app_localizations.dart';
+import 'package:billie/services/audio_service.dart';
+
+import 'package:billie/services/data_manager.dart';
+import 'package:billie/services/io_service.dart';
+import 'package:billie/services/logger_service.dart';
+import 'package:billie/services/playlist_sharing.dart';
+import 'package:billie/services/router_service.dart';
+import 'package:billie/services/settings_manager.dart';
+import 'package:billie/services/update_manager.dart';
+import 'package:billie/style/app_themes.dart';
+import 'package:billie/utilities/flutter_toast.dart';
 import 'package:path_provider/path_provider.dart';
 
 late MusifyAudioHandler audioHandler;
 
 final logger = Logger();
-final appLinks = AppLinks();
+// final appLinks = AppLinks(); // Temporarily removed for build
 
 bool isFdroidBuild = false;
 bool isUpdateChecked = false;
@@ -88,8 +91,8 @@ final List<Locale> appSupportedLocales = appLanguages.values.map((
   return Locale(languageCode);
 }).toList();
 
-class Musify extends StatefulWidget {
-  const Musify({super.key});
+class Billie extends StatefulWidget {
+  const Billie({super.key});
 
   static Future<void> updateAppState(
     BuildContext context, {
@@ -98,7 +101,7 @@ class Musify extends StatefulWidget {
     Color? newAccentColor,
     bool? useSystemColor,
   }) async {
-    context.findAncestorStateOfType<_MusifyState>()!.changeSettings(
+    context.findAncestorStateOfType<_BillieState>()!.changeSettings(
       newThemeMode: newThemeMode,
       newLocale: newLocale,
       newAccentColor: newAccentColor,
@@ -107,10 +110,10 @@ class Musify extends StatefulWidget {
   }
 
   @override
-  _MusifyState createState() => _MusifyState();
+  _BillieState createState() => _BillieState();
 }
 
-class _MusifyState extends State<Musify> {
+class _BillieState extends State<Billie> {
   void changeSettings({
     ThemeMode? newThemeMode,
     Locale? newLocale,
@@ -236,14 +239,10 @@ class _MusifyState extends State<Musify> {
 
   @override
   Widget build(BuildContext context) {
-    return DynamicColorBuilder(
-      builder: (lightColorScheme, darkColorScheme) {
-        final colorScheme = getAppColorScheme(
-          lightColorScheme,
-          darkColorScheme,
-        );
-
-        return AnnotatedRegion<SystemUiOverlayStyle>(
+    // Temporarily disabled DynamicColorBuilder for build
+    final colorScheme = getAppColorScheme(null, null);
+    
+    return AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
             systemNavigationBarColor: Colors.transparent,
@@ -273,8 +272,6 @@ class _MusifyState extends State<Musify> {
             routerConfig: NavigationManager.router,
           ),
         );
-      },
-    );
   }
 }
 
@@ -282,11 +279,16 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initialisation();
 
-  runApp(const Musify());
+  runApp(const Billie());
 }
 
 Future<void> initialisation() async {
   try {
+    // Initialize Firebase
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    
     await Hive.initFlutter();
 
     await Future.wait([
@@ -300,7 +302,7 @@ Future<void> initialisation() async {
       builder: MusifyAudioHandler.new,
       config: const AudioServiceConfig(
         androidNotificationChannelId: 'com.gokadzev.musify',
-        androidNotificationChannelName: 'Musify',
+        androidNotificationChannelName: 'Billie',
         androidNotificationIcon: 'drawable/ic_launcher_foreground',
         androidShowNotificationBadge: true,
         androidStopForegroundOnPause: false,
@@ -315,17 +317,17 @@ Future<void> initialisation() async {
     // Init router
     NavigationManager.instance;
 
-    try {
-      // Listen to incoming links while app is running
-      appLinks.uriLinkStream.listen(
-        handleIncomingLink,
-        onError: (err) {
-          logger.log('URI link error:', err, null);
-        },
-      );
-    } on PlatformException {
-      logger.log('Failed to get initial uri', null, null);
-    }
+    // try {
+    //   // Listen to incoming links while app is running
+    //   appLinks.uriLinkStream.listen(
+    //     handleIncomingLink,
+    //     onError: (err) {
+    //       logger.log('URI link error:', err, null);
+    //     },
+    //   );
+    // } on PlatformException {
+    //   logger.log('Failed to get initial uri', null, null);
+    // }
 
     if (isFdroidBuild && !offlineMode.value) {
       await fetchAnnouncementOnly();

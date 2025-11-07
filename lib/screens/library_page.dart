@@ -21,19 +21,19 @@
 
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:musify/API/musify.dart';
-import 'package:musify/extensions/l10n.dart';
-import 'package:musify/services/playlist_download_service.dart';
-import 'package:musify/services/router_service.dart';
-import 'package:musify/services/settings_manager.dart';
-import 'package:musify/utilities/common_variables.dart';
-import 'package:musify/utilities/flutter_toast.dart';
-import 'package:musify/utilities/playlist_image_picker.dart';
-import 'package:musify/utilities/utils.dart';
-import 'package:musify/widgets/confirmation_dialog.dart';
-import 'package:musify/widgets/playlist_bar.dart';
-import 'package:musify/widgets/section_header.dart';
-import 'package:musify/widgets/section_title.dart';
+import 'package:billie/API/musify.dart';
+import 'package:billie/extensions/l10n.dart';
+import 'package:billie/services/playlist_download_service.dart';
+import 'package:billie/services/router_service.dart';
+import 'package:billie/services/settings_manager.dart';
+import 'package:billie/utilities/common_variables.dart';
+import 'package:billie/utilities/flutter_toast.dart';
+import 'package:billie/utilities/playlist_image_picker.dart';
+import 'package:billie/utilities/utils.dart';
+import 'package:billie/widgets/confirmation_dialog.dart';
+import 'package:billie/widgets/playlist_bar.dart';
+import 'package:billie/widgets/section_header.dart';
+import 'package:billie/widgets/section_title.dart';
 
 class LibraryPage extends StatefulWidget {
   const LibraryPage({super.key});

@@ -46,7 +46,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.gokadzev.musify"
+        applicationId = "com.voxin.billie"
         minSdk = 24
         targetSdk = 36
         versionCode = flutter.versionCode

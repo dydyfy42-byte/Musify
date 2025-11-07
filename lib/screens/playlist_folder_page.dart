@@ -22,12 +22,12 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 
-import 'package:musify/API/musify.dart';
-import 'package:musify/extensions/l10n.dart';
-import 'package:musify/utilities/common_variables.dart';
-import 'package:musify/utilities/utils.dart';
-import 'package:musify/widgets/confirmation_dialog.dart';
-import 'package:musify/widgets/playlist_bar.dart';
+import 'package:billie/API/musify.dart';
+import 'package:billie/extensions/l10n.dart';
+import 'package:billie/utilities/common_variables.dart';
+import 'package:billie/utilities/utils.dart';
+import 'package:billie/widgets/confirmation_dialog.dart';
+import 'package:billie/widgets/playlist_bar.dart';
 
 class PlaylistFolderPage extends StatefulWidget {
   const PlaylistFolderPage({

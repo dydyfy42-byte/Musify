@@ -22,9 +22,9 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:musify/screens/playlist_page.dart';
-import 'package:musify/screens/user_songs_page.dart';
-import 'package:musify/utilities/utils.dart';
+import 'package:billie/screens/playlist_page.dart';
+import 'package:billie/screens/user_songs_page.dart';
+import 'package:billie/utilities/utils.dart';
 
 // Preferences
 
