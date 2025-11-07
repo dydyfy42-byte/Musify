@@ -71,7 +71,6 @@ class SettingsPage extends StatelessWidget {
                 primaryColor,
               ),
             _buildVoxinAppsSection(context),
-            _buildOthersSection(context),
             const SizedBox(height: 20),
           ],
         ),
@@ -334,7 +333,7 @@ class SettingsPage extends StatelessWidget {
                 fontSize: 16,
               ),
             ),
-            subtitle: const Text('تطبيق تحميل الملفات'),
+            subtitle: const Text('تطبيق مشاهدة الأفلام والمسلسلات'),
             trailing: const Icon(Icons.open_in_new),
             onTap: () => launchURL(Uri.parse('https://indexdownload.netlify.app/')),
           ),
@@ -343,31 +342,7 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildOthersSection(BuildContext context) {
-    return Column(
-      children: [
-        SectionHeader(title: context.l10n!.others),
-        CustomBar(
-          context.l10n!.licenses,
-          FluentIcons.document_24_filled,
-          borderRadius: commonCustomBarRadiusFirst,
-          onTap: () => NavigationManager.router.go('/settings/license'),
-        ),
-        CustomBar(
-          context.l10n!.translate,
-          FluentIcons.translate_24_filled,
-          onTap: () =>
-              launchURL(Uri.parse('https://crowdin.com/project/musify')),
-        ),
-        CustomBar(
-          '${context.l10n!.copyLogs} (${logger.getLogCount()})',
-          FluentIcons.error_circle_24_filled,
-          borderRadius: commonCustomBarRadiusLast,
-          onTap: () async => showToast(context, await logger.copyLogs(context)),
-        ),
-      ],
-    );
-  }
+
 
   void _showAccentColorPicker(BuildContext context) {
     showCustomBottomSheet(

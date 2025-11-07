@@ -190,34 +190,86 @@ class _AuthPageState extends State<AuthPage>
       animation: _pulseController,
       builder: (context, child) {
         return Stack(
-          children: List.generate(15, (index) {
-            final random = Random(index);
-            final size = random.nextDouble() * 100 + 50;
-            final left = random.nextDouble() * MediaQuery.of(context).size.width;
-            final top = random.nextDouble() * MediaQuery.of(context).size.height;
-            final opacity = (random.nextDouble() * 0.3 + 0.1) * _pulseAnimation.value;
-            
-            return Positioned(
-              left: left,
-              top: top,
-              child: Transform.scale(
-                scale: _pulseAnimation.value,
-                child: Container(
-                  width: size,
-                  height: size,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white.withOpacity(opacity),
-                  ),
-                  child: Icon(
-                    _getMusicIcon(index),
-                    size: size * 0.6,
-                    color: Colors.white.withOpacity(opacity * 0.8),
-                  ),
+          children: [
+            // خلفية متدرجة إضافية
+            Container(
+              decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  center: Alignment.topRight,
+                  radius: 1.5,
+                  colors: [
+                    Colors.white.withOpacity(0.1),
+                    Colors.transparent,
+                  ],
                 ),
               ),
-            );
-          }),
+            ),
+            // العناصر الموسيقية المتحركة
+            ...List.generate(20, (index) {
+              final random = Random(index);
+              final size = random.nextDouble() * 80 + 30;
+              final left = random.nextDouble() * MediaQuery.of(context).size.width;
+              final top = random.nextDouble() * MediaQuery.of(context).size.height;
+              final opacity = (random.nextDouble() * 0.2 + 0.05) * _pulseAnimation.value;
+              final rotationSpeed = random.nextDouble() * 2 + 1;
+              
+              return Positioned(
+                left: left,
+                top: top,
+                child: Transform.rotate(
+                  angle: _pulseController.value * rotationSpeed * 2 * pi,
+                  child: Transform.scale(
+                    scale: 0.8 + (_pulseAnimation.value - 1) * 0.5,
+                    child: Container(
+                      width: size,
+                      height: size,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: RadialGradient(
+                          colors: [
+                            Colors.white.withOpacity(opacity * 0.3),
+                            Colors.white.withOpacity(opacity * 0.1),
+                            Colors.transparent,
+                          ],
+                        ),
+                      ),
+                      child: Icon(
+                        _getMusicIcon(index),
+                        size: size * 0.5,
+                        color: Colors.white.withOpacity(opacity * 1.2),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }),
+            // موجات صوتية
+            ...List.generate(5, (index) {
+              return Positioned(
+                left: -100 + (index * 50.0),
+                top: MediaQuery.of(context).size.height * 0.7,
+                child: Transform.scale(
+                  scale: _pulseAnimation.value,
+                  child: Container(
+                    width: 4,
+                    height: 100 + (index * 20.0) * _pulseAnimation.value,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      gradient: LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                        colors: [
+                          Colors.white.withOpacity(0.3),
+                          Colors.white.withOpacity(0.1),
+                          Colors.transparent,
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }),
+          ],
         );
       },
     );
@@ -234,7 +286,17 @@ class _AuthPageState extends State<AuthPage>
       Icons.radio,
       Icons.mic,
       Icons.piano,
-      Icons.music_note,
+      Icons.music_video,
+      Icons.library_music,
+      Icons.equalizer,
+      Icons.volume_up,
+      Icons.play_circle_filled,
+      Icons.favorite,
+      Icons.shuffle,
+      Icons.repeat,
+      Icons.skip_next,
+      Icons.skip_previous,
+      Icons.pause_circle_filled,
     ];
     return icons[index % icons.length];
   }
@@ -248,49 +310,116 @@ class _AuthPageState extends State<AuthPage>
             return Transform.scale(
               scale: _pulseAnimation.value,
               child: Container(
-                width: 120,
-                height: 120,
+                width: 140,
+                height: 140,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.white.withOpacity(0.2),
-                  border: Border.all(
-                    color: Colors.white.withOpacity(0.3),
-                    width: 2,
+                  gradient: RadialGradient(
+                    colors: [
+                      Colors.white.withOpacity(0.3),
+                      Colors.white.withOpacity(0.1),
+                      Colors.transparent,
+                    ],
                   ),
+                  border: Border.all(
+                    color: Colors.white.withOpacity(0.4),
+                    width: 3,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.white.withOpacity(0.2),
+                      blurRadius: 20,
+                      spreadRadius: 5,
+                    ),
+                  ],
                 ),
-                child: const Icon(
-                  Icons.music_note,
-                  size: 60,
-                  color: Colors.white,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    // خلفية دائرية داخلية
+                    Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white.withOpacity(0.1),
+                      ),
+                    ),
+                    // أيقونة الموسيقى الرئيسية
+                    const Icon(
+                      Icons.music_note,
+                      size: 70,
+                      color: Colors.white,
+                    ),
+                    // أيقونات صغيرة دوارة
+                    ...List.generate(8, (index) {
+                      final angle = (index * pi / 4) + (_pulseController.value * 2 * pi);
+                      return Transform.rotate(
+                        angle: angle,
+                        child: Transform.translate(
+                          offset: const Offset(45, 0),
+                          child: Icon(
+                            _getMusicIcon(index),
+                            size: 12,
+                            color: Colors.white.withOpacity(0.6),
+                          ),
+                        ),
+                      );
+                    }),
+                  ],
                 ),
               ),
             );
           },
         ),
-        const SizedBox(height: 24),
-        const Text(
-          'Billie',
-          style: TextStyle(
-            fontSize: 48,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-            fontFamily: 'paytoneOne',
-            shadows: [
-              Shadow(
-                offset: Offset(2, 2),
-                blurRadius: 4,
-                color: Colors.black26,
-              ),
-            ],
+        const SizedBox(height: 32),
+        ShaderMask(
+          shaderCallback: (bounds) => const LinearGradient(
+            colors: [Colors.white, Colors.white70, Colors.white],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ).createShader(bounds),
+          child: const Text(
+            'Billie',
+            style: TextStyle(
+              fontSize: 52,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontFamily: 'paytoneOne',
+              shadows: [
+                Shadow(
+                  offset: Offset(3, 3),
+                  blurRadius: 8,
+                  color: Colors.black38,
+                ),
+                Shadow(
+                  offset: Offset(-1, -1),
+                  blurRadius: 4,
+                  color: Colors.white24,
+                ),
+              ],
+            ),
           ),
         ),
-        const SizedBox(height: 8),
-        Text(
-          'تطبيق الموسيقى المفضل لديك',
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.white.withOpacity(0.9),
-            fontWeight: FontWeight.w300,
+        const SizedBox(height: 12),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.white.withOpacity(0.1),
+            border: Border.all(
+              color: Colors.white.withOpacity(0.2),
+              width: 1,
+            ),
+          ),
+          child: Text(
+            'تطبيق الموسيقى المفضل لديك',
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.white.withOpacity(0.95),
+              fontWeight: FontWeight.w400,
+              letterSpacing: 0.5,
+            ),
           ),
         ),
       ],
@@ -301,71 +430,130 @@ class _AuthPageState extends State<AuthPage>
     return Column(
       children: [
         // زر تسجيل الدخول بـ Google
-        SizedBox(
+        Container(
           width: double.infinity,
-          height: 56,
+          height: 60,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            gradient: LinearGradient(
+              colors: [
+                Colors.white.withOpacity(0.25),
+                Colors.white.withOpacity(0.15),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            border: Border.all(
+              color: Colors.white.withOpacity(0.4),
+              width: 1.5,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
           child: ElevatedButton.icon(
             onPressed: _isLoading ? null : _signInWithGoogle,
             icon: _isLoading
                 ? const SizedBox(
-                    width: 20,
-                    height: 20,
+                    width: 22,
+                    height: 22,
                     child: CircularProgressIndicator(
-                      strokeWidth: 2,
+                      strokeWidth: 2.5,
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                     ),
                   )
-                : const Icon(Icons.login, color: Colors.white),
+                : Container(
+                    padding: const EdgeInsets.all(2),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(Icons.login, color: Colors.white, size: 20),
+                  ),
             label: Text(
               _isLoading ? 'جاري تسجيل الدخول...' : 'تسجيل الدخول بـ Google',
               style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
+                fontSize: 17,
+                fontWeight: FontWeight.w700,
                 color: Colors.white,
+                letterSpacing: 0.5,
               ),
             ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.white.withOpacity(0.2),
+              backgroundColor: Colors.transparent,
               foregroundColor: Colors.white,
               elevation: 0,
+              shadowColor: Colors.transparent,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(28),
-                side: BorderSide(
-                  color: Colors.white.withOpacity(0.3),
-                  width: 1,
-                ),
+                borderRadius: BorderRadius.circular(30),
               ),
             ),
           ),
         ),
         
-        const SizedBox(height: 16),
+        const SizedBox(height: 20),
         
         // زر المتابعة كضيف
-        SizedBox(
+        Container(
           width: double.infinity,
-          height: 56,
+          height: 60,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            border: Border.all(
+              color: Colors.white.withOpacity(0.6),
+              width: 2,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
           child: OutlinedButton.icon(
             onPressed: _isLoading ? null : _continueAsGuest,
-            icon: const Icon(Icons.person_outline, color: Colors.white),
+            icon: Container(
+              padding: const EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Icon(Icons.person_outline, color: Colors.white, size: 20),
+            ),
             label: const Text(
               'المتابعة كضيف',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 17,
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
+                letterSpacing: 0.5,
               ),
             ),
             style: OutlinedButton.styleFrom(
               foregroundColor: Colors.white,
-              side: BorderSide(
-                color: Colors.white.withOpacity(0.5),
-                width: 2,
-              ),
+              backgroundColor: Colors.transparent,
+              side: BorderSide.none,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(28),
+                borderRadius: BorderRadius.circular(30),
               ),
             ),
+          ),
+        ),
+        
+        const SizedBox(height: 24),
+        
+        // نص إضافي
+        Text(
+          'اختر طريقة الدخول المفضلة لديك',
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.white.withOpacity(0.8),
+            fontWeight: FontWeight.w300,
           ),
         ),
       ],
