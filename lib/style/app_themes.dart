@@ -19,7 +19,7 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
-import 'package:dynamic_color/dynamic_color.dart';
+// import 'package:dynamic_color/dynamic_color.dart'; // Temporarily removed for build
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:billie/services/settings_manager.dart';
@@ -76,7 +76,7 @@ ColorScheme getAppColorScheme(
     return ColorScheme.fromSeed(
       seedColor: primaryColorSetting,
       brightness: brightness,
-    ).harmonized();
+    ); // .harmonized(); // Temporarily removed for build
   }
 }
 

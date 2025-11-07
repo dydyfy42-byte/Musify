@@ -12,12 +12,9 @@ environment:
   flutter: '>=3.24.0'
 
 dependencies:
-  app_links: ^6.4.1
   audio_service: ^0.18.17
   audio_session: ^0.1.21
   cached_network_image: ^3.4.1
-  dynamic_color: ^1.8.1
-  file_picker: ^10.3.3
   firebase_auth: ^5.3.1
   firebase_core: ^3.6.0
   fluentui_system_icons: ^1.1.273

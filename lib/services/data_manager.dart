@@ -21,7 +21,7 @@
 
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
+// import 'package:file_picker/file_picker.dart'; // Temporarily removed for build
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:billie/extensions/l10n.dart';
@@ -181,6 +181,9 @@ Future<Box> _openBox(String category) async {
 }
 
 Future<String> backupData(BuildContext context) async {
+  // Temporarily disabled for build
+  return 'Backup feature temporarily disabled';
+  /*
   final boxNames = ['user', 'settings'];
   final dlPath = await FilePicker.platform.getDirectoryPath();
 
@@ -244,9 +247,13 @@ Future<String> backupData(BuildContext context) async {
     logger.log('Backup error', e, stackTrace);
     return '${context.l10n!.backupError}: $e';
   }
+  */
 }
 
 Future<String> restoreData(BuildContext context) async {
+  // Temporarily disabled for build
+  return 'Restore feature temporarily disabled';
+  /*
   final boxNames = ['user', 'settings'];
   final result = await FilePicker.platform.pickFiles(allowMultiple: true);
 
@@ -347,4 +354,5 @@ Future<String> restoreData(BuildContext context) async {
     logger.log('Restore error', e, stackTrace);
     return '${context.l10n!.restoreError}: $e';
   }
+  */
 }

@@ -21,9 +21,9 @@
 
 import 'dart:async';
 
-import 'package:app_links/app_links.dart';
+// import 'package:app_links/app_links.dart'; // Temporarily removed for build
 import 'package:audio_service/audio_service.dart';
-import 'package:dynamic_color/dynamic_color.dart';
+// import 'package:dynamic_color/dynamic_color.dart'; // Temporarily removed for build
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +51,7 @@ import 'package:path_provider/path_provider.dart';
 late MusifyAudioHandler audioHandler;
 
 final logger = Logger();
-final appLinks = AppLinks();
+// final appLinks = AppLinks(); // Temporarily removed for build
 
 bool isFdroidBuild = false;
 bool isUpdateChecked = false;
@@ -239,14 +239,10 @@ class _BillieState extends State<Billie> {
 
   @override
   Widget build(BuildContext context) {
-    return DynamicColorBuilder(
-      builder: (lightColorScheme, darkColorScheme) {
-        final colorScheme = getAppColorScheme(
-          lightColorScheme,
-          darkColorScheme,
-        );
-
-        return AnnotatedRegion<SystemUiOverlayStyle>(
+    // Temporarily disabled DynamicColorBuilder for build
+    final colorScheme = getAppColorScheme(null, null);
+    
+    return AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
             systemNavigationBarColor: Colors.transparent,
@@ -276,8 +272,6 @@ class _BillieState extends State<Billie> {
             routerConfig: NavigationManager.router,
           ),
         );
-      },
-    );
   }
 }
 
@@ -323,17 +317,17 @@ Future<void> initialisation() async {
     // Init router
     NavigationManager.instance;
 
-    try {
-      // Listen to incoming links while app is running
-      appLinks.uriLinkStream.listen(
-        handleIncomingLink,
-        onError: (err) {
-          logger.log('URI link error:', err, null);
-        },
-      );
-    } on PlatformException {
-      logger.log('Failed to get initial uri', null, null);
-    }
+    // try {
+    //   // Listen to incoming links while app is running
+    //   appLinks.uriLinkStream.listen(
+    //     handleIncomingLink,
+    //     onError: (err) {
+    //       logger.log('URI link error:', err, null);
+    //     },
+    //   );
+    // } on PlatformException {
+    //   logger.log('Failed to get initial uri', null, null);
+    // }
 
     if (isFdroidBuild && !offlineMode.value) {
       await fetchAnnouncementOnly();

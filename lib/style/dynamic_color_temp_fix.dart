@@ -1,4 +1,4 @@
-import 'package:dynamic_color/dynamic_color.dart';
+// import 'package:dynamic_color/dynamic_color.dart'; // Temporarily removed for build
 import 'package:flutter/material.dart';
 
 // issue: https://github.com/material-foundation/flutter-packages/issues/582
@@ -23,7 +23,7 @@ import 'package:flutter/material.dart';
   );
   final darkScheme = _insertAdditionalColours(darkBase, darkAdditionalColours);
 
-  return (lightScheme.harmonized(), darkScheme.harmonized());
+  return (lightScheme, darkScheme); // .harmonized() temporarily removed for build
 }
 
 List<Color> _extractAdditionalColours(ColorScheme scheme) => [
