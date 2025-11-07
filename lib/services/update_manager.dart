@@ -38,7 +38,7 @@ const String releasesUrl =
     'https://api.github.com/repos/gokadzev/Musify/releases/latest';
 const String downloadUrlKey = 'url';
 const String downloadUrlArm64Key = 'arm64url';
-const String downloadFilename = 'Musify.apk';
+const String downloadFilename = 'Billie.apk';
 
 Future<void> checkAppUpdates() async {
   try {
