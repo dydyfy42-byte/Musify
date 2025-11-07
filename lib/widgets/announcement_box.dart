@@ -21,8 +21,8 @@
 
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:musify/utilities/common_variables.dart';
-import 'package:musify/utilities/url_launcher.dart';
+import 'package:billie/utilities/common_variables.dart';
+import 'package:billie/utilities/url_launcher.dart';
 
 class AnnouncementBox extends StatelessWidget {
   const AnnouncementBox({

@@ -21,25 +21,26 @@
 
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:musify/API/musify.dart';
-import 'package:musify/extensions/l10n.dart';
-import 'package:musify/main.dart';
-import 'package:musify/screens/search_page.dart';
-import 'package:musify/services/data_manager.dart';
-import 'package:musify/services/router_service.dart';
-import 'package:musify/services/settings_manager.dart';
-import 'package:musify/services/update_manager.dart';
-import 'package:musify/style/app_colors.dart';
-import 'package:musify/style/app_themes.dart';
-import 'package:musify/utilities/common_variables.dart';
-import 'package:musify/utilities/flutter_bottom_sheet.dart';
-import 'package:musify/utilities/flutter_toast.dart';
-import 'package:musify/utilities/url_launcher.dart';
-import 'package:musify/utilities/utils.dart';
-import 'package:musify/widgets/bottom_sheet_bar.dart';
-import 'package:musify/widgets/confirmation_dialog.dart';
-import 'package:musify/widgets/custom_bar.dart';
-import 'package:musify/widgets/section_header.dart';
+import 'package:billie/API/musify.dart';
+import 'package:billie/extensions/l10n.dart';
+import 'package:billie/main.dart';
+import 'package:billie/screens/search_page.dart';
+import 'package:billie/services/data_manager.dart';
+import 'package:billie/services/router_service.dart';
+import 'package:billie/services/settings_manager.dart';
+import 'package:billie/services/update_manager.dart';
+import 'package:billie/style/app_colors.dart';
+import 'package:billie/style/app_themes.dart';
+import 'package:billie/utilities/common_variables.dart';
+import 'package:billie/utilities/flutter_bottom_sheet.dart';
+import 'package:billie/utilities/flutter_toast.dart';
+import 'package:billie/utilities/url_launcher.dart';
+import 'package:billie/utilities/utils.dart';
+import 'package:billie/widgets/bottom_sheet_bar.dart';
+import 'package:billie/widgets/confirmation_dialog.dart';
+import 'package:billie/widgets/custom_bar.dart';
+import 'package:billie/widgets/index_app_icon.dart';
+import 'package:billie/widgets/section_header.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -69,6 +70,7 @@ class SettingsPage extends StatelessWidget {
                 inactivatedColor,
                 primaryColor,
               ),
+            _buildVoxinAppsSection(context),
             _buildOthersSection(context),
             const SizedBox(height: 20),
           ],
@@ -247,7 +249,6 @@ class SettingsPage extends StatelessWidget {
         ),
 
         _buildToolsSection(context),
-        _buildSponsorSection(context, primaryColor),
       ],
     );
   }
@@ -311,101 +312,31 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSponsorSection(BuildContext context, Color primaryColor) {
-    final gradientEnd = Color.lerp(primaryColor, Colors.pink, 0.3)!;
-    final shadowColor = primaryColor.withValues(alpha: 0.3);
-    final iconBgColor = Colors.white.withValues(alpha: 0.2);
-    final arrowBgColor = Colors.white.withValues(alpha: 0.15);
-    final arrowColor = Colors.white.withValues(alpha: 0.9);
 
+
+  Widget _buildVoxinAppsSection(BuildContext context) {
     return Column(
       children: [
-        SectionHeader(title: context.l10n!.becomeSponsor),
-        Padding(
-          padding: commonBarPadding,
-          child: Card(
-            margin: const EdgeInsets.only(bottom: 3),
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    primaryColor,
-                    primaryColor.withValues(alpha: 0.8),
-                    gradientEnd,
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: [
-                  BoxShadow(
-                    color: shadowColor,
-                    blurRadius: 8,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(15),
-                  onTap: () =>
-                      launchURL(Uri.parse('https://ko-fi.com/gokadzev')),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 12,
-                      horizontal: 16,
-                    ),
-                    child: SizedBox(
-                      height: 45, // Match CustomBar's minTileHeight
-                      child: Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: iconBgColor,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(
-                              FluentIcons.heart_24_filled,
-                              color: Colors.white,
-                              size: 24,
-                            ),
-                          ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: Text(
-                              context.l10n!.sponsorProject,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600, // Match CustomBar
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                              color: arrowBgColor,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Icon(
-                              FluentIcons.arrow_right_24_filled,
-                              color: arrowColor,
-                              size: 16,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+        SectionHeader(title: 'تطبيقات أخرى من Voxin'),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 25),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.secondaryContainer,
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: ListTile(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            leading: const IndexAppIcon(size: 40),
+            title: const Text(
+              'Index',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
               ),
             ),
+            subtitle: const Text('تطبيق تحميل الملفات'),
+            trailing: const Icon(Icons.open_in_new),
+            onTap: () => launchURL(Uri.parse('https://indexdownload.netlify.app/')),
           ),
         ),
       ],
@@ -431,13 +362,8 @@ class SettingsPage extends StatelessWidget {
         CustomBar(
           '${context.l10n!.copyLogs} (${logger.getLogCount()})',
           FluentIcons.error_circle_24_filled,
-          onTap: () async => showToast(context, await logger.copyLogs(context)),
-        ),
-        CustomBar(
-          context.l10n!.about,
-          FluentIcons.book_information_24_filled,
           borderRadius: commonCustomBarRadiusLast,
-          onTap: () => NavigationManager.router.go('/settings/about'),
+          onTap: () async => showToast(context, await logger.copyLogs(context)),
         ),
       ],
     );
@@ -466,7 +392,7 @@ class SettingsPage extends StatelessWidget {
                 // ignore: deprecated_member_use
                 color.value,
               );
-              Musify.updateAppState(
+              Billie.updateAppState(
                 context,
                 newAccentColor: color,
                 useSystemColor: false,
@@ -526,7 +452,7 @@ class SettingsPage extends StatelessWidget {
             modeNames[mode.index],
             () {
               addOrUpdateData('settings', 'themeIndex', mode.index);
-              Musify.updateAppState(context, newThemeMode: mode);
+              Billie.updateAppState(context, newThemeMode: mode);
               Navigator.pop(context);
             },
             themeMode == mode ? activatedColor : inactivatedColor,
@@ -572,7 +498,7 @@ class SettingsPage extends StatelessWidget {
             language,
             () {
               addOrUpdateData('settings', 'language', newLocaleFullCode);
-              Musify.updateAppState(context, newLocale: newLocale);
+              Billie.updateAppState(context, newLocale: newLocale);
               showToast(context, context.l10n!.languageMsg);
               Navigator.pop(context);
             },
@@ -632,7 +558,7 @@ class SettingsPage extends StatelessWidget {
   void _toggleSystemColor(BuildContext context, bool value) {
     addOrUpdateData('settings', 'useSystemColor', value);
     useSystemColor.value = value;
-    Musify.updateAppState(
+    Billie.updateAppState(
       context,
       newAccentColor: primaryColorSetting,
       useSystemColor: value,
@@ -643,7 +569,7 @@ class SettingsPage extends StatelessWidget {
   void _togglePureBlack(BuildContext context, bool value) {
     addOrUpdateData('settings', 'usePureBlackColor', value);
     usePureBlackColor.value = value;
-    Musify.updateAppState(context);
+    Billie.updateAppState(context);
     showToast(context, context.l10n!.settingChangedMsg);
   }
 
@@ -653,7 +579,7 @@ class SettingsPage extends StatelessWidget {
     transitionsBuilder = value
         ? const PredictiveBackPageTransitionsBuilder()
         : const CupertinoPageTransitionsBuilder();
-    Musify.updateAppState(context);
+    Billie.updateAppState(context);
     showToast(context, context.l10n!.settingChangedMsg);
   }
 

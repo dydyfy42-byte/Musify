@@ -26,11 +26,11 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:musify/API/musify.dart';
-import 'package:musify/extensions/l10n.dart';
-import 'package:musify/main.dart';
-import 'package:musify/services/data_manager.dart';
-import 'package:musify/utilities/flutter_toast.dart';
+import 'package:billie/API/musify.dart';
+import 'package:billie/extensions/l10n.dart';
+import 'package:billie/main.dart';
+import 'package:billie/services/data_manager.dart';
+import 'package:billie/utilities/flutter_toast.dart';
 
 class OfflinePlaylistService {
   factory OfflinePlaylistService() => _instance;

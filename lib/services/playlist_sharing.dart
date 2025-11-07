@@ -21,10 +21,10 @@
 
 import 'dart:convert';
 
-import 'package:musify/main.dart';
-import 'package:musify/services/proxy_manager.dart';
-import 'package:musify/services/settings_manager.dart';
-import 'package:musify/utilities/formatter.dart';
+import 'package:billie/main.dart';
+import 'package:billie/services/proxy_manager.dart';
+import 'package:billie/services/settings_manager.dart';
+import 'package:billie/utilities/formatter.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 class PlaylistSharingService {

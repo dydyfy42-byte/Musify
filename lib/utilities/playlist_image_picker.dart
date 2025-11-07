@@ -22,7 +22,7 @@
 import 'dart:convert';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:musify/extensions/l10n.dart';
+import 'package:billie/extensions/l10n.dart';
 
 Future<String?> pickImage() async {
   final result = await FilePicker.platform.pickFiles(

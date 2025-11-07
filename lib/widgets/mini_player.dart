@@ -1,13 +1,13 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:musify/main.dart';
-import 'package:musify/models/full_player_state.dart';
-import 'package:musify/models/position_data.dart';
-import 'package:musify/screens/now_playing_page.dart';
-import 'package:musify/utilities/common_variables.dart';
-import 'package:musify/widgets/marque.dart';
-import 'package:musify/widgets/song_artwork.dart';
+import 'package:billie/main.dart';
+import 'package:billie/models/full_player_state.dart';
+import 'package:billie/models/position_data.dart';
+import 'package:billie/screens/now_playing_page.dart';
+import 'package:billie/utilities/common_variables.dart';
+import 'package:billie/widgets/marque.dart';
+import 'package:billie/widgets/song_artwork.dart';
 import 'package:rxdart/rxdart.dart';
 
 Stream<FullPlayerState> _createFullPlayerStateStream() => Rx.combineLatest3(
@@ -371,7 +371,7 @@ class _ProgressBar extends StatelessWidget {
     return LinearProgressIndicator(
       value: progress,
       minHeight: MiniPlayer._progressBarHeight,
-      backgroundColor: colorScheme.outline.withValues(alpha: 0.1),
+      backgroundColor: colorScheme.outline.withOpacity(0.1),
       valueColor: AlwaysStoppedAnimation<Color>(colorScheme.primary),
     );
   }

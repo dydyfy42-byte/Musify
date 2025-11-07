@@ -22,16 +22,17 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:musify/API/version.dart';
-import 'package:musify/extensions/l10n.dart';
-import 'package:musify/screens/about_page.dart';
-import 'package:musify/screens/bottom_navigation_page.dart';
-import 'package:musify/screens/home_page.dart';
-import 'package:musify/screens/library_page.dart';
-import 'package:musify/screens/search_page.dart';
-import 'package:musify/screens/settings_page.dart';
-import 'package:musify/screens/user_songs_page.dart';
-import 'package:musify/services/settings_manager.dart';
+import 'package:billie/API/version.dart';
+import 'package:billie/extensions/l10n.dart';
+import 'package:billie/screens/about_page.dart';
+import 'package:billie/screens/auth_page.dart';
+import 'package:billie/screens/bottom_navigation_page.dart';
+import 'package:billie/screens/home_page.dart';
+import 'package:billie/screens/library_page.dart';
+import 'package:billie/screens/search_page.dart';
+import 'package:billie/screens/settings_page.dart';
+import 'package:billie/screens/user_songs_page.dart';
+import 'package:billie/services/settings_manager.dart';
 
 class NavigationManager {
   factory NavigationManager() {
@@ -44,6 +45,15 @@ class NavigationManager {
 
   void _setupRouter() {
     final routes = [
+      GoRoute(
+        path: authPath,
+        pageBuilder: (context, state) {
+          return getPage(
+            child: const AuthPage(),
+            state: state,
+          );
+        },
+      ),
       StatefulShellRoute.indexedStack(
         parentNavigatorKey: parentNavigatorKey,
         branches: _getRouteBranches(),
@@ -58,7 +68,7 @@ class NavigationManager {
 
     router = GoRouter(
       navigatorKey: parentNavigatorKey,
-      initialLocation: homePath,
+      initialLocation: authPath,
       routes: routes,
       restorationScopeId: 'router',
       debugLogDiagnostics: kDebugMode,
@@ -103,6 +113,7 @@ class NavigationManager {
   GoRouteInformationParser get routeInformationParser =>
       router.routeInformationParser;
 
+  static const String authPath = '/auth';
   static const String homePath = '/home';
   static const String settingsPath = '/settings';
   static const String searchPath = '/search';
@@ -236,7 +247,7 @@ class _OfflineSearchPlaceholder extends StatelessWidget {
               size: 64,
               color: Theme.of(
                 context,
-              ).colorScheme.onSurface.withValues(alpha: 0.5),
+              ).colorScheme.onSurface.withOpacity(0.5),
             ),
             const SizedBox(height: 16),
             Text(
@@ -244,7 +255,7 @@ class _OfflineSearchPlaceholder extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 color: Theme.of(
                   context,
-                ).colorScheme.onSurface.withValues(alpha: 0.7),
+                ).colorScheme.onSurface.withOpacity(0.7),
               ),
             ),
           ],

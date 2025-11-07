@@ -25,23 +25,23 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:musify/API/musify.dart';
-import 'package:musify/extensions/l10n.dart';
-import 'package:musify/main.dart';
-import 'package:musify/services/data_manager.dart';
-import 'package:musify/services/playlist_download_service.dart';
-import 'package:musify/services/playlist_sharing.dart';
-import 'package:musify/services/settings_manager.dart';
-import 'package:musify/utilities/common_variables.dart';
-import 'package:musify/utilities/flutter_toast.dart';
-import 'package:musify/utilities/playlist_image_picker.dart';
-import 'package:musify/utilities/sort_utils.dart';
-import 'package:musify/utilities/utils.dart';
-import 'package:musify/widgets/playlist_cube.dart';
-import 'package:musify/widgets/playlist_header.dart';
-import 'package:musify/widgets/song_bar.dart';
-import 'package:musify/widgets/sort_button.dart';
-import 'package:musify/widgets/spinner.dart';
+import 'package:billie/API/musify.dart';
+import 'package:billie/extensions/l10n.dart';
+import 'package:billie/main.dart';
+import 'package:billie/services/data_manager.dart';
+import 'package:billie/services/playlist_download_service.dart';
+import 'package:billie/services/playlist_sharing.dart';
+import 'package:billie/services/settings_manager.dart';
+import 'package:billie/utilities/common_variables.dart';
+import 'package:billie/utilities/flutter_toast.dart';
+import 'package:billie/utilities/playlist_image_picker.dart';
+import 'package:billie/utilities/sort_utils.dart';
+import 'package:billie/utilities/utils.dart';
+import 'package:billie/widgets/playlist_cube.dart';
+import 'package:billie/widgets/playlist_header.dart';
+import 'package:billie/widgets/song_bar.dart';
+import 'package:billie/widgets/sort_button.dart';
+import 'package:billie/widgets/spinner.dart';
 
 enum PlaylistSortType { default_, title, artist }
 
@@ -467,7 +467,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
                   CircularProgressIndicator(
                     value: progress.progress,
                     strokeWidth: 2,
-                    backgroundColor: Colors.grey.withValues(alpha: .3),
+                    backgroundColor: Colors.grey.withOpacity(0.3),
                     valueColor: AlwaysStoppedAnimation<Color>(
                       Theme.of(context).colorScheme.primary,
                     ),

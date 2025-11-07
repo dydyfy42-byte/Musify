@@ -24,8 +24,8 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:musify/utilities/common_variables.dart';
-import 'package:musify/widgets/no_artwork_cube.dart';
+import 'package:billie/utilities/common_variables.dart';
+import 'package:billie/widgets/no_artwork_cube.dart';
 
 class PlaylistArtwork extends StatelessWidget {
   const PlaylistArtwork({

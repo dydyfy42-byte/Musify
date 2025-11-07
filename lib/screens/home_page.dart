@@ -21,18 +21,18 @@
 
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:musify/API/musify.dart';
-import 'package:musify/extensions/l10n.dart';
-import 'package:musify/main.dart';
-import 'package:musify/screens/playlist_page.dart';
-import 'package:musify/services/settings_manager.dart';
-import 'package:musify/utilities/common_variables.dart';
-import 'package:musify/utilities/utils.dart';
-import 'package:musify/widgets/announcement_box.dart';
-import 'package:musify/widgets/playlist_cube.dart';
-import 'package:musify/widgets/section_header.dart';
-import 'package:musify/widgets/song_bar.dart';
-import 'package:musify/widgets/spinner.dart';
+import 'package:billie/API/musify.dart';
+import 'package:billie/extensions/l10n.dart';
+import 'package:billie/main.dart';
+import 'package:billie/screens/playlist_page.dart';
+import 'package:billie/services/settings_manager.dart';
+import 'package:billie/utilities/common_variables.dart';
+import 'package:billie/utilities/utils.dart';
+import 'package:billie/widgets/announcement_box.dart';
+import 'package:billie/widgets/playlist_cube.dart';
+import 'package:billie/widgets/section_header.dart';
+import 'package:billie/widgets/song_bar.dart';
+import 'package:billie/widgets/spinner.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -173,8 +173,8 @@ class _HomePageState extends State<HomePage> {
     int itemCount,
     double height,
   ) {
-    return CarouselView.weighted(
-      flexWeights: const <int>[3, 2, 1],
+    return CarouselView(
+      itemExtent: 200,
       itemSnapping: true,
       onTap: (index) => Navigator.push(
         context,

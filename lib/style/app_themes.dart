@@ -22,8 +22,8 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:musify/services/settings_manager.dart';
-import 'package:musify/style/dynamic_color_temp_fix.dart';
+import 'package:billie/services/settings_manager.dart';
+import 'package:billie/style/dynamic_color_temp_fix.dart';
 
 ThemeMode themeMode = getThemeMode(themeModeSetting);
 Brightness brightness = getBrightnessFromThemeMode(themeMode);
@@ -114,9 +114,7 @@ ThemeData getAppTheme(ColorScheme colorScheme) {
       iconColor: colorScheme.primary,
     ),
     sliderTheme: base.sliderTheme.copyWith(
-      year2023: false,
       trackHeight: 12,
-      thumbSize: WidgetStateProperty.all(const Size(6, 30)),
     ),
     bottomSheetTheme: base.bottomSheetTheme.copyWith(backgroundColor: bgColor),
     inputDecorationTheme: base.inputDecorationTheme.copyWith(
